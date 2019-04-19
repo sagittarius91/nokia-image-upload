@@ -75,7 +75,7 @@ main(){
 	dockerBuild
 	dockerBuildMQTT
 	createNameSpace
-	#labelK8sNode $1
+	labelK8sNode $1
 	deployingYamlInK8s
 	echo "Please read the README.md for further details on how to use the challenge set-up"
 }
