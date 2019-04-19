@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: nokianode
+    namespace: nokia
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: nokianode3
+        spec:
+            containers:
+                - name: nodecontainer
+                  image: nokia/node-app
+                  imagePullPolicy: Never
+                  env:
+                      - name: mongo_service
+                        value: "nokia-mongo.nokia.svc.cluster.local"
+                      - name: mongo_port
+                        value: "27017"
+                      - name: mqtt_service
+                        value: "nokia-mqtt.nokia.svc.cluster.local"
+                      - name: mongo_database
+                        value: "nokiadb"
+                      - name: mqtt_port
+                        value: "1883"
+                      - name: mqtt_topic
+                        value: "nokiatopic"
+                      - name: host
+                        value: "10.0.1.205"
+                      - name: node_port
+                        value: "30446"
+                      - name: images_folder
+                        value: "/usr/src/nokia/image/challenge/"
+                  ports:
+                      - containerPort: 3000
+                        name: server
+            nodeSelector:
+                name: masternode
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: nokianode
+    namespace: nokia
+spec:
+    type: NodePort
+    ports:
+        - name: http
+          port: 3000
+          targetPort: 3000
+          nodePort: 30446
+    selector:
+        app: nokianode3
