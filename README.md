@@ -39,7 +39,7 @@ env:
   - name: node_port
 	value: "30446"
   - name: images_folder
-	value: "/usr/src/image/challenge/"
+	value: "/usr/src/nokia/image/challenge/"
 
 ```
 Save the file
