@@ -93,14 +93,18 @@ As can be seen above, nokianode service is running on NodePort 30446
 ## How to use the Application
 
 ### Using provided html files
-To upload an image to the nokianode server, open the html/image_post.html file in a browser of your choice
+To upload an image to the nokianode server, edit html/get_image.html to add album name and image name in action tag of the form
+
+```
+<img src="http://<ip-of-host-machine>:30446/album/<albumName>/<imageName>" style="width:20%">
+```
 
 Add album name and upload the image and hit Upload Image button to upload the image.
 
 
 To get an image from the album, edit html/get_image.html to add album name and image name in action tag of the form
 ```
-<img src="http://localhost:8000/album/<albumName>/<imageName>" style="width:20%">
+<img src="http://<ip-of-host-machine>:30446/album/<albumName>/<imageName>" style="width:20%">
 ```
 And load the html in a browser.
 
