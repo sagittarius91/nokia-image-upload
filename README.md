@@ -95,36 +95,36 @@ As can be seen above, nokianode service is running on NodePort 30446
 ### Using provided html files
 To upload an image to the nokianode server, open the html/image_post.html file in a browser of your choice
 
-```
-// Write HTML part here
-```
+Add album name and upload the image and hit Upload Image button to upload the image.
 
 
-To get an image from the album, open the html/get_image.html file in a browser of your choice
-
+To get an image from the album, edit html/get_image.html to add album name and image name in action tag of the form
 ```
-// Write HTML part here
+<img src="http://localhost:8000/album/<albumName>/<imageName>" style="width:20%">
 ```
+And load the html in a browser.
 
 
 ### Using endpoints
 To delete an album
 
 ```
-// Write curl here
+$ curl -XDELETE http://10.0.1.205:30446/album/<albumName>
 ```
 
 To delete an image in an album
 
 ```
-// Write curl here
+$ curl -XDELETE http://10.0.1.205:30446/album/<albumName>/<imageName>
 ```
 
 To get all images in an album
 
 ```
-// Write curl here
+$ curl -XGET http://10.0.1.205:30446/album/<albumName>
 ```
+This will give location of every image in the album present inside server pod.(nokia-node)
+
 
 ### Check for notifications in MQTT
 While uploading/deleting an image a notification is pushed into an MQTT topic "nokiatopic". To check for this enter the mqtt kubernetes pod. 
@@ -132,7 +132,7 @@ While uploading/deleting an image a notification is pushed into an MQTT topic "n
 ```
 $ kubectl exec -it nokia-mqtt-586dd7678f-km5xq ash -n nokia
 
-/ # //Write command for subscribing and seeeing data in topic
+/ # mosquitto_sub -h localhost -t nokiatopic
 
 ```
 
@@ -168,14 +168,6 @@ process_start_time_seconds 1555670124
 .
 .
 .
-```
-
-
-
-### Endpoints
-
-```
-$ http://<host ip of the machine>:30446/api-docs/
 ```
 
 
