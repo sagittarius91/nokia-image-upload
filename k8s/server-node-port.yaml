@@ -28,7 +28,7 @@ spec:
                       - name: mqtt_topic
                         value: "nokiatopic"
                       - name: host
-                        value: "10.0.1.205"
+                        value: "<host-ip-of-machine>"
                       - name: node_port
                         value: "30446"
                       - name: images_folder
